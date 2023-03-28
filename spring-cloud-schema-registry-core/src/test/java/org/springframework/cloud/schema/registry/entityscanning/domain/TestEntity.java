@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.schema.registry.entityScanning.domain;
+package org.springframework.cloud.schema.registry.entityscanning.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
