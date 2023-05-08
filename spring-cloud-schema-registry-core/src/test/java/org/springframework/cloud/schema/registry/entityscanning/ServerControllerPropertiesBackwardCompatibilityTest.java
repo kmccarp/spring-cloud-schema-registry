@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.schema.registry.entityScanning;
+package org.springframework.cloud.schema.registry.entityscanning;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
