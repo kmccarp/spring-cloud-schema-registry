@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.schema.registry.entityScanning;
+package org.springframework.cloud.schema.registry.entityscanning;
 
 
 import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.schema.registry.EnableSchemaRegistryServer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @author Marius Bogoevici
  */
-public class EntityScanningTests {
+public class EntityScanningTestsWithEntityScan {
 
 	@Test
-	public void testApplicationWithEmbeddedSchemaRegistryServerOutsideOfRootPackage()
-			throws Exception {
+	public void testApplicationWithEmbeddedSchemaRegistryServerOutsideOfRootPackage() {
 		final ConfigurableApplicationContext context = SpringApplication
 				.run(CustomApplicationEmbeddingSchemaServer.class, "--server.port=0");
 		context.close();
@@ -39,6 +39,7 @@ public class EntityScanningTests {
 
 	@EnableAutoConfiguration
 	@EnableSchemaRegistryServer
+	@EntityScan(basePackages = "org.springframework.cloud.schema.registry.entityScanning.domain")
 	public static class CustomApplicationEmbeddingSchemaServer {
 
 	}
