@@ -145,7 +145,7 @@ public class AvroSchemaMessageConverter extends AbstractAvroMessageConverter {
 
 	@Override
 	protected Schema resolveSchemaForWriting(Object payload, MessageHeaders headers,
-			MimeType hintedContentType) {
+MimeType hintedContentType) {
 		return this.schema;
 	}
 

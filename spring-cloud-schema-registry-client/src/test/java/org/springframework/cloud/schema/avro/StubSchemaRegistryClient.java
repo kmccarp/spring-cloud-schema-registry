@@ -40,7 +40,7 @@ public class StubSchemaRegistryClient implements SchemaRegistryClient {
 
 	@Override
 	public SchemaRegistrationResponse register(String subject, String format,
-			String schema) {
+String schema) {
 		if (!this.storedSchemas.containsKey(subject)) {
 			this.storedSchemas.put(subject, new TreeMap<Integer, SchemaWithId>());
 		}
@@ -52,8 +52,8 @@ public class StubSchemaRegistryClient implements SchemaRegistryClient {
 				SchemaRegistrationResponse schemaRegistrationResponse = new SchemaRegistrationResponse();
 				schemaRegistrationResponse.setId(integerSchemaEntry.getValue().getId());
 				schemaRegistrationResponse.setSchemaReference(
-						new SchemaReference(subject, integerSchemaEntry.getKey(),
-								AvroSchemaRegistryClientMessageConverter.AVRO_FORMAT));
+			new SchemaReference(subject, integerSchemaEntry.getKey(),
+		AvroSchemaRegistryClientMessageConverter.AVRO_FORMAT));
 				return schemaRegistrationResponse;
 			}
 		}
@@ -63,7 +63,7 @@ public class StubSchemaRegistryClient implements SchemaRegistryClient {
 		SchemaRegistrationResponse schemaRegistrationResponse = new SchemaRegistrationResponse();
 		schemaRegistrationResponse.setId(this.index.getAndIncrement());
 		schemaRegistrationResponse.setSchemaReference(new SchemaReference(subject,
-				nextVersion, AvroSchemaRegistryClientMessageConverter.AVRO_FORMAT));
+	nextVersion, AvroSchemaRegistryClientMessageConverter.AVRO_FORMAT));
 		this.schemasById.put(id, schema);
 		return schemaRegistrationResponse;
 	}
@@ -71,18 +71,18 @@ public class StubSchemaRegistryClient implements SchemaRegistryClient {
 	@Override
 	public String fetch(SchemaReference schemaReference) {
 		if (!AvroSchemaRegistryClientMessageConverter.AVRO_FORMAT
-				.equals(schemaReference.getFormat())) {
+	.equals(schemaReference.getFormat())) {
 			throw new IllegalArgumentException("Only 'avro' is supported by this client");
 		}
 		if (!this.storedSchemas.containsKey(schemaReference.getSubject())) {
 			throw new SchemaNotFoundException("Not found: " + schemaReference);
 		}
 		if (!this.storedSchemas.get(schemaReference.getSubject())
-				.containsKey(schemaReference.getVersion())) {
+	.containsKey(schemaReference.getVersion())) {
 			throw new SchemaNotFoundException("Not found: " + schemaReference);
 		}
 		return this.storedSchemas.get(schemaReference.getSubject())
-				.get(schemaReference.getVersion()).getSchema();
+	.get(schemaReference.getVersion()).getSchema();
 	}
 
 	@Override

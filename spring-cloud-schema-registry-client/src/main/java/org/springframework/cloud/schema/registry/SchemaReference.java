@@ -99,7 +99,7 @@ public class SchemaReference {
 	@Override
 	public String toString() {
 		return "SchemaReference{" + "subject='" + this.subject + '\'' + ", version="
-				+ this.version + ", format='" + this.format + '\'' + '}';
+	+ this.version + ", format='" + this.format + '\'' + '}';
 	}
 
 }

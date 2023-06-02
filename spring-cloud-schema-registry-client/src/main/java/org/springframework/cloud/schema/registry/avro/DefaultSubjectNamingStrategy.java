@@ -28,8 +28,8 @@ public class DefaultSubjectNamingStrategy implements SubjectNamingStrategy {
 	@Override
 	public String toSubject(String subjectNamePrefix, Schema schema) {
 		return StringUtils.hasText(subjectNamePrefix) ?
-				subjectNamePrefix + "-" + schema.getName().toLowerCase() :
-				schema.getName().toLowerCase();
+	subjectNamePrefix + "-" + schema.getName().toLowerCase() :
+	schema.getName().toLowerCase();
 	}
 
 }

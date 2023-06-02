@@ -47,13 +47,13 @@ public class AvroSchemaLocationsTest {
 	@Test
 	public void schemaLocationWithMultipleRecords() throws Exception {
 		testMultipleRecordsSchemaLoading(
-				"--spring.cloud.schema.avro.schema-locations=classpath:schemas/user1_multiple_records.schema");
+	"--spring.cloud.schema.avro.schema-locations=classpath:schemas/user1_multiple_records.schema");
 	}
 
 	@Test
 	public void schemaImportWithMultipleRecords() throws Exception {
 		testMultipleRecordsSchemaLoading(
-				"--spring.cloud.schema.avro.schema-imports=classpath:schemas/user1_multiple_records.schema");
+	"--spring.cloud.schema.avro.schema-imports=classpath:schemas/user1_multiple_records.schema");
 	}
 
 	private void testMultipleRecordsSchemaLoading(String schemaLoadingProperty) throws Exception {
@@ -68,9 +68,9 @@ public class AvroSchemaLocationsTest {
 
 		// Source
 		ConfigurableApplicationContext sourceContext = SpringApplication.run(
-				AvroSourceApplication.class, "--server.port=0", "--spring.jmx.enabled=false",
-				"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
-				schemaLoadingProperty);
+	AvroSourceApplication.class, "--server.port=0", "--spring.jmx.enabled=false",
+	"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
+	schemaLoadingProperty);
 
 		Source source1 = sourceContext.getBean(Source.class);
 		source1.output().send(MessageBuilder.withPayload(user1).build());
@@ -87,7 +87,7 @@ public class AvroSchemaLocationsTest {
 
 		// Sink
 		ConfigurableApplicationContext sinkContext =
-				SpringApplication.run(AvroSinkApplication.class, "--server.port=0", "--spring.jmx.enabled=false");
+	SpringApplication.run(AvroSinkApplication.class, "--server.port=0", "--spring.jmx.enabled=false");
 
 		Sink sink = sinkContext.getBean(Sink.class);
 		sink.input().send(message1);

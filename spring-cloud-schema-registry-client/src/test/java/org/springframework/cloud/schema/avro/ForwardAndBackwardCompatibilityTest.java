@@ -70,30 +70,30 @@ public class ForwardAndBackwardCompatibilityTest {
 	public void genericRecordBackwardCompatibility() throws Exception {
 
 		Schema s1 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
 
 		GenericRecord user1 = new GenericRecordBuilder(s1)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 12)
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 12)
+	.build();
 
 		Schema s2 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
 
 		GenericRecord user2 = new GenericRecordBuilder(s2)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 13)
-				.set("favoritePlace", "Amsterdam")
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 13)
+	.set("favoritePlace", "Amsterdam")
+	.build();
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationGenericRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				"classpath:schemas/user_v2.avsc",
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationGenericRecord.class,
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	"classpath:schemas/user_v2.avsc",
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		GenericData.Record resultUser1 = (GenericData.Record) result.get(0);
 		GenericData.Record resultUser2 = (GenericData.Record) result.get(1);
@@ -116,30 +116,30 @@ public class ForwardAndBackwardCompatibilityTest {
 	public void genericRecordForwardCompatibility() throws Exception {
 
 		Schema s1 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
 
 		GenericRecord user1 = new GenericRecordBuilder(s1)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 12)
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 12)
+	.build();
 
 		Schema s2 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
 
 		GenericRecord user2 = new GenericRecordBuilder(s2)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 13)
-				.set("favoritePlace", "Amsterdam")
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 13)
+	.set("favoritePlace", "Amsterdam")
+	.build();
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationGenericRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				"classpath:schemas/user.avsc",
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationGenericRecord.class,
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	"classpath:schemas/user.avsc",
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		GenericData.Record resultUser1 = (GenericData.Record) result.get(0);
 		GenericData.Record resultUser2 = (GenericData.Record) result.get(1);
@@ -160,30 +160,30 @@ public class ForwardAndBackwardCompatibilityTest {
 	public void genericRecordNoReaderSchema() throws Exception {
 
 		Schema s1 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user.avsc").getInputStream());
 
 		GenericRecord user1 = new GenericRecordBuilder(s1)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 12)
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 12)
+	.build();
 
 		Schema s2 = new Schema.Parser().parse(
-				new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
+	new DefaultResourceLoader().getResource("classpath:schemas/user_v2.avsc").getInputStream());
 
 		GenericRecord user2 = new GenericRecordBuilder(s2)
-				.set("name", "foo" + UUID.randomUUID().toString())
-				.set("favoriteColor", "foo" + UUID.randomUUID().toString())
-				.set("favoriteNumber", 13)
-				.set("favoritePlace", "Amsterdam")
-				.build();
+	.set("name", "foo" + UUID.randomUUID().toString())
+	.set("favoriteColor", "foo" + UUID.randomUUID().toString())
+	.set("favoriteNumber", 13)
+	.set("favoritePlace", "Amsterdam")
+	.build();
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationGenericRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				NO_READER_SCHEMA,
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationGenericRecord.class,
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	NO_READER_SCHEMA,
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		GenericData.Record resultUser1 = (GenericData.Record) result.get(0);
 		GenericData.Record resultUser2 = (GenericData.Record) result.get(1);
@@ -214,11 +214,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationSpecificRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				"classpath:schemas/user_v2.avsc",
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationSpecificRecord.class,
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	"classpath:schemas/user_v2.avsc",
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		example.avro.v2.User resultUser1 = (User) result.get(0);
 		example.avro.v2.User resultUser2 = (User) result.get(1);
@@ -245,11 +245,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationSpecificRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				"classpath:schemas/user.avsc",
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationSpecificRecord.class,
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	"classpath:schemas/user.avsc",
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		example.avro.User resultUser1 = (example.avro.User) result.get(0);
 		example.avro.User resultUser2 = (example.avro.User) result.get(1);
@@ -274,10 +274,10 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		compatibilityTest(user1, user2, AvroSinkApplicationSpecificRecord.class,
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				NO_READER_SCHEMA,
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	NO_READER_SCHEMA,
+	NO_DYNAMIC_SCHEMA_GENERATION);
 	}
 
 	@Test
@@ -292,11 +292,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationUser1V2.class, // Source with User1 v1 payload type
-				"classpath:schemas/user1_v1.schema",
-				"classpath:schemas/user1_v2.schema",
-				NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationUser1V2.class, // Source with User1 v1 payload type
+	"classpath:schemas/user1_v1.schema",
+	"classpath:schemas/user1_v2.schema",
+	NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		org.springframework.cloud.schema.avro.v2.User1 resultUser1 = (org.springframework.cloud.schema.avro.v2.User1) result.get(0);
 		org.springframework.cloud.schema.avro.v2.User1 resultUser2 = (org.springframework.cloud.schema.avro.v2.User1) result.get(1);
@@ -322,11 +322,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
-				"classpath:schemas/user1_v1.schema",
-				"classpath:schemas/user1_v2.schema",
-				NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
+	"classpath:schemas/user1_v1.schema",
+	"classpath:schemas/user1_v2.schema",
+	NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
+	NO_DYNAMIC_SCHEMA_GENERATION);
 
 		org.springframework.cloud.schema.avro.User1 resultUser1 = (org.springframework.cloud.schema.avro.User1) result.get(0);
 		org.springframework.cloud.schema.avro.User1 resultUser2 = (org.springframework.cloud.schema.avro.User1) result.get(1);
@@ -350,11 +350,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		compatibilityTest(user1, user2,
-				AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
-				NO_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
+	NO_DYNAMIC_SCHEMA_GENERATION);
 	}
 
 	@Test
@@ -369,11 +369,11 @@ public class ForwardAndBackwardCompatibilityTest {
 		user2.setFavoritePlace("Amsterdam");
 
 		List<?> result = compatibilityTest(user1, user2,
-				AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
-				NO_EXPLICIT_V1_SCHEMA,
-				NO_EXPLICIT_V2_SCHEMA,
-				NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
-				ENABLE_DYNAMIC_SCHEMA_GENERATION);
+	AvroSinkApplicationUser1V1.class, // Source with User1 v1 payload type
+	NO_EXPLICIT_V1_SCHEMA,
+	NO_EXPLICIT_V2_SCHEMA,
+	NO_READER_SCHEMA, // the readerSchema is IGNORED for java type pojos
+	ENABLE_DYNAMIC_SCHEMA_GENERATION);
 
 		org.springframework.cloud.schema.avro.User1 resultUser1 = (org.springframework.cloud.schema.avro.User1) result.get(0);
 		org.springframework.cloud.schema.avro.User1 resultUser2 = (org.springframework.cloud.schema.avro.User1) result.get(1);
@@ -386,16 +386,16 @@ public class ForwardAndBackwardCompatibilityTest {
 	}
 
 	public <U1, U2, S extends TestSinkApplication> List<?> compatibilityTest(
-			U1 user1,
-			U2 user2,
-			Class<S> sinkApplicationClass,
-			String user1Schema,
-			String user2Schema,
-			String readerSchema,
-			boolean dynamicSchemaGenerationEnabled) throws Exception {
+U1 user1,
+U2 user2,
+Class<S> sinkApplicationClass,
+String user1Schema,
+String user2Schema,
+String readerSchema,
+boolean dynamicSchemaGenerationEnabled) throws Exception {
 
 		List<String> commonSourceArguments = Arrays.asList("--server.port=0", "--spring.jmx.enabled=false",
-				"--spring.cloud.stream.bindings.output.contentType=application/*+avro");
+	"--spring.cloud.stream.bindings.output.contentType=application/*+avro");
 
 		// Source 1
 		List<String> source1Args = new ArrayList<>(commonSourceArguments);
@@ -405,7 +405,7 @@ public class ForwardAndBackwardCompatibilityTest {
 		source1Args.add("--spring.cloud.schema.avro.dynamicSchemaGenerationEnabled=" + dynamicSchemaGenerationEnabled);
 
 		ConfigurableApplicationContext sourceContext1 = SpringApplication.run(
-				AvroSourceApplication.class, source1Args.toArray(new String[source1Args.size()]));
+	AvroSourceApplication.class, source1Args.toArray(new String[source1Args.size()]));
 
 		Source source1 = sourceContext1.getBean(Source.class);
 		source1.output().send(MessageBuilder.withPayload(user1).build());
@@ -421,7 +421,7 @@ public class ForwardAndBackwardCompatibilityTest {
 		source2Args.add("--spring.cloud.schema.avro.dynamicSchemaGenerationEnabled=" + dynamicSchemaGenerationEnabled);
 
 		ConfigurableApplicationContext sourceContext2 = SpringApplication.run(
-				AvroSourceApplication.class, source2Args.toArray(new String[source2Args.size()]));
+	AvroSourceApplication.class, source2Args.toArray(new String[source2Args.size()]));
 		Source source2 = sourceContext2.getBean(Source.class);
 		source2.output().send(MessageBuilder.withPayload(user2).build());
 
@@ -436,7 +436,7 @@ public class ForwardAndBackwardCompatibilityTest {
 			sinkArgs.add("--spring.cloud.schema.avro.reader-schema=" + readerSchema);
 		}
 		ConfigurableApplicationContext sinkContext =
-				SpringApplication.run(sinkApplicationClass, sinkArgs.toArray(new String[sinkArgs.size()]));
+	SpringApplication.run(sinkApplicationClass, sinkArgs.toArray(new String[sinkArgs.size()]));
 
 		Sink sink = sinkContext.getBean(Sink.class);
 		sink.input().send(outboundMessage);

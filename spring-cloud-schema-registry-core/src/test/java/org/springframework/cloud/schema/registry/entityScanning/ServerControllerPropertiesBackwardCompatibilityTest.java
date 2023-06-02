@@ -38,13 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Christian Tzolov
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { SchemaServerConfiguration.class })
+@SpringBootTest(classes = {SchemaServerConfiguration.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @EnableAutoConfiguration
-@TestPropertySource(properties = {
-		"spring.cloud.stream.schema.server.path=/testpath2",
-		"spring.cloud.stream.schema.server.allowSchemaDeletion=true"
+@TestPropertySource(properties = {"spring.cloud.stream.schema.server.path=/testpath2","spring.cloud.stream.schema.server.allowSchemaDeletion=true"
 })
 public class ServerControllerPropertiesBackwardCompatibilityTest extends AbstractServerControllerTest {
 
@@ -57,9 +55,9 @@ public class ServerControllerPropertiesBackwardCompatibilityTest extends Abstrac
 	@Test
 	public void findSchema() throws Exception {
 		mockMvc.perform(get(schemaServerProperties.getPath() + "/test667/format/v667")
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("Test Schema Definition")));
+	.accept(MediaType.APPLICATION_JSON))
+	.andExpect(status().isOk())
+	.andExpect(content().string(containsString("Test Schema Definition")));
 	}
 
 }

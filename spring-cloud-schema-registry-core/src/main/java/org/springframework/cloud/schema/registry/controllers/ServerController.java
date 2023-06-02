@@ -64,7 +64,7 @@ public class ServerController {
 	private final SchemaServerProperties schemaServerProperties;
 
 	public ServerController(SchemaRepository repository, Map<String, SchemaValidator> validators,
-			SchemaServerProperties schemaServerProperties) {
+SchemaServerProperties schemaServerProperties) {
 		Assert.notNull(repository, "cannot be null");
 		Assert.notEmpty(validators, "cannot be empty");
 		this.repository = repository;
@@ -79,14 +79,14 @@ public class ServerController {
 
 		if (validator == null) {
 			throw new UnsupportedFormatException(String.format("Invalid format, supported types are: %s",
-					StringUtils.collectionToCommaDelimitedString(this.validators.keySet())));
+		StringUtils.collectionToCommaDelimitedString(this.validators.keySet())));
 		}
 
 		validator.validate(schema.getDefinition());
 
 		Schema result;
 		List<Schema> registeredEntities =
-				this.repository.findBySubjectAndFormatOrderByVersion(schema.getSubject(), schema.getFormat());
+	this.repository.findBySubjectAndFormatOrderByVersion(schema.getSubject(), schema.getFormat());
 		if (registeredEntities.isEmpty()) {
 			schema.setVersion(1);
 			result = this.repository.save(schema);
@@ -102,8 +102,8 @@ public class ServerController {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.LOCATION, builder.path("/{subject}/{format}/v{version}")
-				.buildAndExpand(result.getSubject(), result.getFormat(), result.getVersion())
-				.toString());
+	.buildAndExpand(result.getSubject(), result.getFormat(), result.getVersion())
+	.toString());
 		ResponseEntity<Schema> response = new ResponseEntity<>(result, headers, HttpStatus.CREATED);
 
 		return response;
@@ -112,13 +112,13 @@ public class ServerController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{subject}/{format}/v{version}")
 	public ResponseEntity<Schema> findOne(@PathVariable("subject") String subject,
-			@PathVariable("format") String format,
-			@PathVariable("version") Integer version) {
+@PathVariable("format") String format,
+@PathVariable("version") Integer version) {
 		Schema schema = this.repository.findOneBySubjectAndFormatAndVersion(subject, format, version);
 		if (schema == null) {
 			throw new SchemaNotFoundException(
-					String.format("Could not find Schema by subject: %s, format: %s, version %s",
-							subject, format, version));
+		String.format("Could not find Schema by subject: %s, format: %s, version %s",
+	subject, format, version));
 		}
 		return new ResponseEntity<>(schema, HttpStatus.OK);
 	}
@@ -149,7 +149,7 @@ public class ServerController {
 	 */
 	@Deprecated
 	public ResponseEntity<List<Schema>> findBySubjectAndVersion(@PathVariable("subject") String subject,
-			@PathVariable("format") String format) {
+@PathVariable("format") String format) {
 		return findBySubjectAndFormatOrderByVersionAsc(subject, format);
 	}
 
@@ -169,26 +169,26 @@ public class ServerController {
 	@GetMapping(produces = APPLICATION_JSON_VALUE, path = "/{subject}/{format}")
 	@NonNull
 	public ResponseEntity<List<Schema>> findBySubjectAndFormat(@NonNull @PathVariable("subject") final String subject,
-			@NonNull @PathVariable("format") final String format) {
+@NonNull @PathVariable("format") final String format) {
 		return findBySubjectAndFormatOrderByVersionAsc(subject, format);
 	}
 
 	@RequestMapping(value = "/{subject}/{format}/v{version}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("subject") String subject,
-			@PathVariable("format") String format,
-			@PathVariable("version") Integer version) {
+@PathVariable("format") String format,
+@PathVariable("version") Integer version) {
 		if (this.schemaServerProperties.isAllowSchemaDeletion()) {
 			Schema schema = this.repository.findOneBySubjectAndFormatAndVersion(subject, format, version);
 			if (schema == null) {
 				throw new SchemaNotFoundException(
-						String.format("Could not find Schema by subject: %s, format: %s, version %s",
-								subject, format, version));
+			String.format("Could not find Schema by subject: %s, format: %s, version %s",
+		subject, format, version));
 			}
 			deleteSchema(schema);
 		}
 		else {
 			throw new SchemaDeletionNotAllowedException(String.format("Not permitted deletion of Schema by " +
-					"subject: %s, format: %s, version %s", subject, format, version));
+		"subject: %s, format: %s, version %s", subject, format, version));
 		}
 	}
 
@@ -217,18 +217,18 @@ public class ServerController {
 		}
 		else {
 			throw new SchemaDeletionNotAllowedException(String.format("Not permitted deletion of Schema by " +
-					"subject: %s", subject));
+		"subject: %s", subject));
 		}
 
 	}
 
 	@NonNull
 	public final ResponseEntity<List<Schema>> findBySubjectAndFormatOrderByVersionAsc(@NonNull final String subject,
-			@NonNull final String format) {
+@NonNull final String format) {
 		List<Schema> schemas = this.repository.findBySubjectAndFormatOrderByVersion(subject, format);
 		if (schemas.isEmpty()) {
 			throw new SchemaNotFoundException(
-					String.format("No schemas found for subject %s and format %s", subject, format));
+		String.format("No schemas found for subject %s and format %s", subject, format));
 		}
 		return new ResponseEntity<>(schemas, HttpStatus.OK);
 	}

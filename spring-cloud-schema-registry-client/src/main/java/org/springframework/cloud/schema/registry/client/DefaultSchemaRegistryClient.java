@@ -59,7 +59,7 @@ public class DefaultSchemaRegistryClient implements SchemaRegistryClient {
 		return this.restTemplate;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public SchemaRegistrationResponse register(String subject, String format, String schema) {
 		Map<String, String> requestBody = new HashMap<>();
@@ -72,19 +72,19 @@ public class DefaultSchemaRegistryClient implements SchemaRegistryClient {
 			Map<String, Object> responseBody = (Map<String, Object>) responseEntity.getBody();
 			registrationResponse.setId((Integer) responseBody.get("id"));
 			registrationResponse.setSchemaReference(new SchemaReference(subject, (Integer) responseBody.get("version"),
-					responseBody.get("format").toString()));
+		responseBody.get("format").toString()));
 			return registrationResponse;
 		}
 		throw new RuntimeException(
-				"Failed to register schema: " + responseEntity.toString());
+	"Failed to register schema: " + responseEntity.toString());
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public String fetch(SchemaReference schemaReference) {
 		ResponseEntity<Map> responseEntity = this.restTemplate.getForEntity(this.endpoint
-				+ "/" + schemaReference.getSubject() + "/" + schemaReference.getFormat()
-				+ "/v" + schemaReference.getVersion(), Map.class);
+	+ "/" + schemaReference.getSubject() + "/" + schemaReference.getFormat()
+	+ "/v" + schemaReference.getVersion(), Map.class);
 		if (!responseEntity.getStatusCode().is2xxSuccessful()) {
 			throw new RuntimeException("Failed to fetch schema: " + responseEntity.toString());
 		}

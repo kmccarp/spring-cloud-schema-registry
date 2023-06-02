@@ -58,7 +58,7 @@ public interface AvroSchemaServiceManager {
 	 * @param writerSchema {@link Schema} writerSchema provided at run time
 	 * @return datum reader which can be used to read Avro payload
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	DatumReader<Object> getDatumReader(Class<? extends Object> type, Schema schema, Schema writerSchema);
 
 	/**
@@ -71,5 +71,5 @@ public interface AvroSchemaServiceManager {
 	 * @throws IOException in case of error
 	 */
 	Object readData(Class<? extends Object> targetClass, byte[] payload, Schema readerSchema, Schema writerSchema)
-																	throws IOException;
+throws IOException;
 }

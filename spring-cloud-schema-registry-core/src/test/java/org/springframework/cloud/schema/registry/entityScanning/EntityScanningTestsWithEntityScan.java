@@ -33,7 +33,7 @@ public class EntityScanningTestsWithEntityScan {
 	@Test
 	public void testApplicationWithEmbeddedSchemaRegistryServerOutsideOfRootPackage() {
 		final ConfigurableApplicationContext context = SpringApplication
-				.run(CustomApplicationEmbeddingSchemaServer.class, "--server.port=0");
+	.run(CustomApplicationEmbeddingSchemaServer.class, "--server.port=0");
 		context.close();
 	}
 

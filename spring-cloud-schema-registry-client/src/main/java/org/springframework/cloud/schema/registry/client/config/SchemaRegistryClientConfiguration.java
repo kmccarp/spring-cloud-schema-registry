@@ -38,7 +38,7 @@ public class SchemaRegistryClientConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public SchemaRegistryClient schemaRegistryClient(SchemaRegistryClientProperties schemaRegistryClientProperties,
-			RestTemplateBuilder restTemplateBuilder) {
+RestTemplateBuilder restTemplateBuilder) {
 		DefaultSchemaRegistryClient defaultSchemaRegistryClient = new DefaultSchemaRegistryClient(restTemplateBuilder);
 
 		if (StringUtils.hasText(schemaRegistryClientProperties.getEndpoint())) {
@@ -46,8 +46,8 @@ public class SchemaRegistryClientConfiguration {
 		}
 
 		SchemaRegistryClient client = (schemaRegistryClientProperties.isCached())
-				? new CachingRegistryClient(defaultSchemaRegistryClient)
-				: defaultSchemaRegistryClient;
+	? new CachingRegistryClient(defaultSchemaRegistryClient)
+	: defaultSchemaRegistryClient;
 
 		return client;
 	}

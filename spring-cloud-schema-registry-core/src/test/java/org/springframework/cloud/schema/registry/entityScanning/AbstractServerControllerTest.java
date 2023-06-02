@@ -30,8 +30,6 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
-
-
 /**
  * @author Christian Tzolov
  */
@@ -51,7 +49,7 @@ public abstract class AbstractServerControllerTest {
 	@BeforeEach
 	public void setupMocks() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-				.defaultRequest(get("/").accept(MediaType.APPLICATION_JSON)).build();
+	.defaultRequest(get("/").accept(MediaType.APPLICATION_JSON)).build();
 		Schema schema = new Schema();
 		schema.setSubject("test667");
 		schema.setVersion(667);

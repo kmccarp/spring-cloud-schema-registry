@@ -39,9 +39,9 @@ class OriginalContentTypeResolver implements ContentTypeResolver {
 	@Override
 	public MimeType resolve(MessageHeaders headers) {
 		Object contentType = headers
-				.get(BINDER_ORIGINAL_CONTENT_TYPE) != null
-						? headers.get(BINDER_ORIGINAL_CONTENT_TYPE)
-						: headers.get(MessageHeaders.CONTENT_TYPE);
+	.get(BINDER_ORIGINAL_CONTENT_TYPE) != null
+	? headers.get(BINDER_ORIGINAL_CONTENT_TYPE)
+	: headers.get(MessageHeaders.CONTENT_TYPE);
 		MimeType mimeType = null;
 		if (contentType instanceof MimeType) {
 			mimeType = (MimeType) contentType;

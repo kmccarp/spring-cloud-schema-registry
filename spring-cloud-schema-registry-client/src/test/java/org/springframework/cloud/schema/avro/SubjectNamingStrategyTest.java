@@ -65,12 +65,12 @@ public class SubjectNamingStrategyTest {
 	@Test
 	public void testQualifiedSubjectNamingStrategy() throws Exception {
 		ConfigurableApplicationContext sourceContext = SpringApplication.run(
-				AvroSourceApplication.class, "--server.port=0", "--debug",
-				"--spring.jmx.enabled=false",
-				"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
-				"--" + propertyPrefix + ".schema.avro.subjectNamingStrategy="
-						+ "org.springframework.cloud.schema.registry.avro.QualifiedSubjectNamingStrategy",
-				"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
+	AvroSourceApplication.class, "--server.port=0", "--debug",
+	"--spring.jmx.enabled=false",
+	"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
+	"--" + propertyPrefix + ".schema.avro.subjectNamingStrategy="
++ "org.springframework.cloud.schema.registry.avro.QualifiedSubjectNamingStrategy",
+	"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
 
 		Source source = sourceContext.getBean(Source.class);
 		User1 user1 = new User1();
@@ -79,12 +79,12 @@ public class SubjectNamingStrategyTest {
 		source.output().send(MessageBuilder.withPayload(user1).build());
 
 		MessageCollector barSourceMessageCollector = sourceContext
-				.getBean(MessageCollector.class);
+	.getBean(MessageCollector.class);
 		Message<?> message = barSourceMessageCollector.forChannel(source.output())
-				.poll(1000, TimeUnit.MILLISECONDS);
+	.poll(1000, TimeUnit.MILLISECONDS);
 
 		assertThat(message.getHeaders().get("contentType")).isEqualTo(MimeType.valueOf(
-				"application/vnd.org.springframework.cloud.schema.avro.User1.v1+avro"));
+	"application/vnd.org.springframework.cloud.schema.avro.User1.v1+avro"));
 	}
 
 	@EnableBinding(Source.class)

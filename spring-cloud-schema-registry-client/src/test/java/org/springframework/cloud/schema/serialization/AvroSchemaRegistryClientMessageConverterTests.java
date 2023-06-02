@@ -97,7 +97,7 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 	@Before
 	public void setup() {
 		this.schemaRegistryServerContext = SpringApplication.run(
-				ServerApplication.class, "--spring.main.allow-bean-definition-overriding=true");
+	ServerApplication.class, "--spring.main.allow-bean-definition-overriding=true");
 		this.restTemplateBuilder = this.schemaRegistryServerContext.getBean(RestTemplateBuilder.class);
 	}
 
@@ -110,10 +110,10 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 	public void testSendMessage() throws Exception {
 
 		ConfigurableApplicationContext sourceContext = SpringApplication.run(
-				AvroSourceApplication.class, "--server.port=0",
-				"--spring.jmx.enabled=false",
-				"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
-				"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
+	AvroSourceApplication.class, "--server.port=0",
+	"--spring.jmx.enabled=false",
+	"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
+	"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
 		Source source = sourceContext.getBean(Source.class);
 		User1 firstOutboundFoo = new User1();
 		firstOutboundFoo.setFavoriteColor("foo" + UUID.randomUUID().toString());
@@ -121,13 +121,13 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		source.output().send(MessageBuilder.withPayload(firstOutboundFoo).build());
 		MessageCollector sourceMessageCollector = sourceContext.getBean(MessageCollector.class);
 		Message<?> outboundMessage = sourceMessageCollector.forChannel(source.output())
-				.poll(1000, TimeUnit.MILLISECONDS);
+	.poll(1000, TimeUnit.MILLISECONDS);
 
 		ConfigurableApplicationContext barSourceContext = SpringApplication.run(
-				AvroSourceApplication.class, "--server.port=0",
-				"--spring.jmx.enabled=false",
-				"--spring.cloud.stream.bindings.output.contentType=application/vnd.user1.v1+avro",
-				"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
+	AvroSourceApplication.class, "--server.port=0",
+	"--spring.jmx.enabled=false",
+	"--spring.cloud.stream.bindings.output.contentType=application/vnd.user1.v1+avro",
+	"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true");
 		Source barSource = barSourceContext.getBean(Source.class);
 		User2 firstOutboundUser2 = new User2();
 		firstOutboundUser2.setFavoriteColor("foo" + UUID.randomUUID().toString());
@@ -135,7 +135,7 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		barSource.output().send(MessageBuilder.withPayload(firstOutboundUser2).build());
 		MessageCollector barSourceMessageCollector = barSourceContext.getBean(MessageCollector.class);
 		Message<?> barOutboundMessage = barSourceMessageCollector
-				.forChannel(barSource.output()).poll(1000, TimeUnit.MILLISECONDS);
+	.forChannel(barSource.output()).poll(1000, TimeUnit.MILLISECONDS);
 
 		assertThat(barOutboundMessage).isNotNull();
 
@@ -144,10 +144,10 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		secondBarOutboundPojo.setName("foo" + UUID.randomUUID().toString());
 		source.output().send(MessageBuilder.withPayload(secondBarOutboundPojo).build());
 		Message<?> secondBarOutboundMessage = sourceMessageCollector
-				.forChannel(source.output()).poll(1000, TimeUnit.MILLISECONDS);
+	.forChannel(source.output()).poll(1000, TimeUnit.MILLISECONDS);
 
 		ConfigurableApplicationContext sinkContext = SpringApplication.run(
-				AvroSinkApplication.class, "--server.port=0", "--spring.jmx.enabled=false");
+	AvroSinkApplication.class, "--server.port=0", "--spring.jmx.enabled=false");
 		Sink sink = sinkContext.getBean(Sink.class);
 		sink.input().send(outboundMessage);
 		sink.input().send(barOutboundMessage);
@@ -177,14 +177,14 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 
 	@Test
 	public void testSchemaImportConfiguration() throws Exception {
-		final String[] args = { "--server.port=0", "--spring.jmx.enabled=false",
-				"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true",
-				"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
-				"--spring.cloud.stream.bindings.output.destination=test",
-				"--spring.cloud.stream.bindings.schema-registry-client.endpoint=http://localhost:8990",
-				"--" + propertyPrefix + ".schema.avro.schema-locations=classpath:schemas/Command.avsc",
-				"--" + propertyPrefix + ".schema.avro.schema-imports=classpath:schemas/imports/Sms.avsc,"
-						+ " classpath:schemas/imports/Email.avsc, classpath:schemas/imports/PushNotification.avsc" };
+		final String[] args = {"--server.port=0", "--spring.jmx.enabled=false",
+	"--" + propertyPrefix + ".schema.avro.dynamicSchemaGenerationEnabled=true",
+	"--spring.cloud.stream.bindings.output.contentType=application/*+avro",
+	"--spring.cloud.stream.bindings.output.destination=test",
+	"--spring.cloud.stream.bindings.schema-registry-client.endpoint=http://localhost:8990",
+	"--" + propertyPrefix + ".schema.avro.schema-locations=classpath:schemas/Command.avsc",
+	"--" + propertyPrefix + ".schema.avro.schema-imports=classpath:schemas/imports/Sms.avsc,"
++ " classpath:schemas/imports/Email.avsc, classpath:schemas/imports/PushNotification.avsc"};
 
 		final ConfigurableApplicationContext sourceContext = SpringApplication.run(AvroSourceApplication.class, args);
 		final ConfigurableApplicationContext sinkContext = SpringApplication.run(CommandSinkApplication.class, args);
@@ -193,7 +193,7 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		barSource.output().send(MessageBuilder.withPayload(notification).build());
 		final MessageCollector barSourceMessageCollector = sourceContext.getBean(MessageCollector.class);
 		final Message<?> outboundMessage = barSourceMessageCollector
-				.forChannel(barSource.output()).poll(1000, TimeUnit.MILLISECONDS);
+	.forChannel(barSource.output()).poll(1000, TimeUnit.MILLISECONDS);
 		assertThat(outboundMessage).isNotNull();
 		Sink sink = sinkContext.getBean(Sink.class);
 		sink.input().send(outboundMessage);
@@ -208,9 +208,9 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 	public void testNoCacheConfiguration() {
 		if (propertyPrefix.equalsIgnoreCase("spring.cloud")) {
 			ConfigurableApplicationContext sourceContext = SpringApplication
-					.run(NoCacheConfiguration.class, "--spring.main.web-environment=false");
+		.run(NoCacheConfiguration.class, "--spring.main.web-environment=false");
 			AvroSchemaRegistryClientMessageConverter converter = sourceContext
-					.getBean(AvroSchemaRegistryClientMessageConverter.class);
+		.getBean(AvroSchemaRegistryClientMessageConverter.class);
 			DirectFieldAccessor accessor = new DirectFieldAccessor(converter);
 			assertThat(accessor.getPropertyValue("cacheManager")).isInstanceOf(NoOpCacheManager.class);
 		}
@@ -222,7 +222,7 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		when(mockCache.getCache(any())).thenReturn(new NoOpCache(""));
 		AvroSchemaServiceManager manager = new AvroSchemaServiceManagerImpl();
 		AvroSchemaRegistryClientMessageConverter converter = new AvroSchemaRegistryClientMessageConverter(
-				new DefaultSchemaRegistryClient(restTemplateBuilder), mockCache, manager);
+	new DefaultSchemaRegistryClient(restTemplateBuilder), mockCache, manager);
 		ReflectionTestUtils.invokeMethod(converter, "getCache", "TEST_CACHE");
 		verify(mockCache).getCache("TEST_CACHE");
 	}
@@ -269,7 +269,7 @@ public class AvroSchemaRegistryClientMessageConverterTests {
 		AvroSchemaRegistryClientMessageConverter avroSchemaRegistryClientMessageConverter() {
 			AvroSchemaServiceManager manager = new AvroSchemaServiceManagerImpl();
 			return new AvroSchemaRegistryClientMessageConverter(
-					new DefaultSchemaRegistryClient(new RestTemplate()), new NoOpCacheManager(), manager);
+		new DefaultSchemaRegistryClient(new RestTemplate()), new NoOpCacheManager(), manager);
 		}
 
 		@Bean

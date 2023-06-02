@@ -105,7 +105,7 @@ public class AvroSchemaServiceManagerImpl implements AvroSchemaServiceManager {
 	 * @param writerSchema {@link Schema} writerSchema provided at run time
 	 * @return datum reader which can be used to read Avro payload
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public DatumReader<Object> getDatumReader(Class<?> type, Schema readerSchema, Schema writerSchema) {
 		DatumReader<Object> reader = null;
@@ -148,7 +148,7 @@ public class AvroSchemaServiceManagerImpl implements AvroSchemaServiceManager {
 		}
 		if (reader == null) {
 			throw new MessageConversionException("No schema can be inferred from type "
-					+ type.getName() + " and no schema has been explicitly configured.");
+		+ type.getName() + " and no schema has been explicitly configured.");
 		}
 		return reader;
 	}
@@ -164,7 +164,7 @@ public class AvroSchemaServiceManagerImpl implements AvroSchemaServiceManager {
 	 */
 	@Override
 	public Object readData(Class<? extends Object> clazz, byte[] payload, Schema readerSchema, Schema writerSchema)
-			throws IOException {
+throws IOException {
 		DatumReader<Object> reader = this.getDatumReader(clazz, readerSchema, writerSchema);
 		Decoder decoder = DecoderFactory.get().binaryDecoder(payload, null);
 		return reader.read(null, decoder);

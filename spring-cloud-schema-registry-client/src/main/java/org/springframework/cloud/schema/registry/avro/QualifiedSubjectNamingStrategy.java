@@ -29,8 +29,8 @@ public class QualifiedSubjectNamingStrategy implements SubjectNamingStrategy {
 	@Override
 	public String toSubject(String subjectNamePrefix, Schema schema) {
 		return StringUtils.hasText(subjectNamePrefix) ?
-				subjectNamePrefix + "-" + schema.getFullName().toLowerCase() :
-				schema.getFullName().toLowerCase();
+	subjectNamePrefix + "-" + schema.getFullName().toLowerCase() :
+	schema.getFullName().toLowerCase();
 	}
 
 }

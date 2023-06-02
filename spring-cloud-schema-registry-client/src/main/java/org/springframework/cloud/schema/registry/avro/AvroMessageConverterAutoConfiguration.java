@@ -43,22 +43,22 @@ import org.springframework.util.ReflectionUtils;
 @ConditionalOnClass(name = "org.apache.avro.Schema")
 @ConditionalOnProperty(value = "spring.cloud.schemaRegistryClient.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.springframework.cloud.schema.registry.client.SchemaRegistryClient")
-@EnableConfigurationProperties({ AvroMessageConverterProperties.class })
+@EnableConfigurationProperties({AvroMessageConverterProperties.class})
 @Import(AvroSchemaServiceManagerImpl.class)
 public class AvroMessageConverterAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(AvroSchemaRegistryClientMessageConverter.class)
 	public AvroSchemaRegistryClientMessageConverter avroSchemaMessageConverter(
-			SchemaRegistryClient schemaRegistryClient,
-			AvroSchemaServiceManager avroSchemaServiceManager,
-			AvroMessageConverterProperties avroMessageConverterProperties) {
+SchemaRegistryClient schemaRegistryClient,
+AvroSchemaServiceManager avroSchemaServiceManager,
+AvroMessageConverterProperties avroMessageConverterProperties) {
 
 		AvroSchemaRegistryClientMessageConverter avroSchemaRegistryClientMessageConverter =
-				new AvroSchemaRegistryClientMessageConverter(schemaRegistryClient, cacheManager(), avroSchemaServiceManager);
+	new AvroSchemaRegistryClientMessageConverter(schemaRegistryClient, cacheManager(), avroSchemaServiceManager);
 
 		avroSchemaRegistryClientMessageConverter.setDynamicSchemaGenerationEnabled(
-				avroMessageConverterProperties.isDynamicSchemaGenerationEnabled());
+	avroMessageConverterProperties.isDynamicSchemaGenerationEnabled());
 
 		if (avroMessageConverterProperties.getReaderSchema() != null) {
 			avroSchemaRegistryClientMessageConverter.setReaderSchema(avroMessageConverterProperties.getReaderSchema());
@@ -75,11 +75,11 @@ public class AvroMessageConverterAutoConfiguration {
 			Class<?> clazz = avroMessageConverterProperties.getSubjectNamingStrategy();
 			Constructor constructor = ReflectionUtils.accessibleConstructor(clazz);
 			avroSchemaRegistryClientMessageConverter.setSubjectNamingStrategy(
-					(SubjectNamingStrategy) constructor.newInstance());
+		(SubjectNamingStrategy) constructor.newInstance());
 		}
 		catch (Exception ex) {
 			throw new IllegalStateException("Unable to create SubjectNamingStrategy "
-					+ avroMessageConverterProperties.getSubjectNamingStrategy().toString(), ex);
+		+ avroMessageConverterProperties.getSubjectNamingStrategy().toString(), ex);
 		}
 		avroSchemaRegistryClientMessageConverter.setSubjectNamePrefix(avroMessageConverterProperties.getSubjectNamePrefix());
 

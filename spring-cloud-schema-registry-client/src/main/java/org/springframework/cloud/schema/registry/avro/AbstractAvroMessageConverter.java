@@ -82,7 +82,7 @@ public abstract class AbstractAvroMessageConverter extends AbstractMessageConver
 	@Override
 	protected boolean canConvertFrom(Message<?> message, Class<?> targetClass) {
 		return super.canConvertFrom(message, targetClass)
-				&& (message.getPayload() instanceof byte[]);
+	&& (message.getPayload() instanceof byte[]);
 	}
 
 	@Override

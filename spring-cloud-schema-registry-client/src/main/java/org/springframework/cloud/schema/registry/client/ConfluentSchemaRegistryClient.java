@@ -46,8 +46,8 @@ import org.springframework.web.client.RestTemplate;
 public class ConfluentSchemaRegistryClient implements SchemaRegistryClient {
 
 	private static final List<String> ACCEPT_HEADERS = Arrays.asList(
-			"application/vnd.schemaregistry.v1+json",
-			"application/vnd.schemaregistry+json", "application/json");
+"application/vnd.schemaregistry.v1+json",
+"application/vnd.schemaregistry+json", "application/json");
 
 	private RestTemplate template;
 
@@ -92,17 +92,17 @@ public class ConfluentSchemaRegistryClient implements SchemaRegistryClient {
 		try {
 			HttpEntity<String> request = new HttpEntity<>(payload, headers);
 			ResponseEntity<Map> response = this.template.exchange(
-					this.endpoint + "/subjects/" + subject + "/versions", HttpMethod.POST, request, Map.class);
+		this.endpoint + "/subjects/" + subject + "/versions", HttpMethod.POST, request, Map.class);
 			id = (Integer) response.getBody().get("id");
 		}
 		catch (HttpStatusCodeException httpException) {
 			throw new RuntimeException(String.format("Failed to register subject %s, server replied with status %d",
-					subject, httpException.getStatusCode().value()), httpException);
+		subject, httpException.getStatusCode().value()), httpException);
 		}
 
 		try {
 			ResponseEntity<List> response = this.template.getForEntity(
-					this.endpoint + "/subjects/" + subject + "/versions", List.class);
+		this.endpoint + "/subjects/" + subject + "/versions", List.class);
 
 			final List body = response.getBody();
 			if (!CollectionUtils.isEmpty(body)) {
@@ -111,7 +111,7 @@ public class ConfluentSchemaRegistryClient implements SchemaRegistryClient {
 		}
 		catch (HttpStatusCodeException httpException) {
 			throw new RuntimeException(String.format("Failed to register subject %s, server replied with status %d",
-					subject, httpException.getStatusCode().value()), httpException);
+		subject, httpException.getStatusCode().value()), httpException);
 		}
 
 		SchemaRegistrationResponse schemaRegistrationResponse = new SchemaRegistrationResponse();
@@ -129,7 +129,7 @@ public class ConfluentSchemaRegistryClient implements SchemaRegistryClient {
 		HttpEntity<String> request = new HttpEntity<>("", headers);
 		try {
 			ResponseEntity<Map> response = this.template.exchange(this.endpoint + path,
-					HttpMethod.GET, request, Map.class);
+		HttpMethod.GET, request, Map.class);
 			return (String) response.getBody().get("schema");
 		}
 		catch (HttpStatusCodeException e) {
@@ -151,7 +151,7 @@ public class ConfluentSchemaRegistryClient implements SchemaRegistryClient {
 		HttpEntity<String> request = new HttpEntity<>("", headers);
 		try {
 			ResponseEntity<Map> response = this.template.exchange(this.endpoint + path,
-					HttpMethod.GET, request, Map.class);
+		HttpMethod.GET, request, Map.class);
 			return (String) response.getBody().get("schema");
 		}
 		catch (HttpStatusCodeException e) {

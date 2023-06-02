@@ -57,9 +57,9 @@ public abstract class AbstractBackwardCompatibilityEnvironmentPostProcessor impl
 		// This post-processor is called multiple times but sets the properties only once.
 		if (!CollectionUtils.isEmpty(properties)) {
 			logger.info(" 'spring.cloud.stream.schemaXXX' property prefix detected! " +
-					"Use the 'spring.schemaXXX' prefix instead!");
+		"Use the 'spring.schemaXXX' prefix instead!");
 			PropertiesPropertySource propertiesPropertySource =
-					new PropertiesPropertySource(propertyKeyName, properties);
+		new PropertiesPropertySource(propertyKeyName, properties);
 			environment.getPropertySources().addLast(propertiesPropertySource);
 		}
 	}

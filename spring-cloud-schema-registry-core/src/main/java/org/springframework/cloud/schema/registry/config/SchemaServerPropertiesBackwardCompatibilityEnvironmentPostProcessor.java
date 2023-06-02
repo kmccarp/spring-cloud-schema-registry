@@ -24,8 +24,7 @@ import java.util.Map;
  *
  * @author Christian Tzolov
  */
-public class SchemaServerPropertiesBackwardCompatibilityEnvironmentPostProcessor
-		extends AbstractBackwardCompatibilityEnvironmentPostProcessor {
+public class SchemaServerPropertiesBackwardCompatibilityEnvironmentPostProcessorextends AbstractBackwardCompatibilityEnvironmentPostProcessor {
 
 	public SchemaServerPropertiesBackwardCompatibilityEnvironmentPostProcessor() {
 		super(SchemaServerPropertiesBackwardCompatibilityEnvironmentPostProcessor.class.getName());
